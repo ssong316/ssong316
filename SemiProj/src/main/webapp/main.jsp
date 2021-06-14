@@ -40,7 +40,7 @@
 		class="navbar navbar-expand-lg navbar-dark pb_navbar pb_scrolled-light"
 		id="templateux-navbar">
 		<div class="container">
-			<a class="navbar-brand" href="index.html"><span
+			<a class="navbar-brand" href="main.jsp"><span
 				class="text-danger">WHATNI</span></a>
 			<div class="site-menu-toggle js-site-menu-toggle  ml-auto"
 				data-aos="fade" data-toggle="collapse"
@@ -53,9 +53,9 @@
 
 			<div class="collapse navbar-collapse" id="templateux-navbar-nav">
 				<ul class="navbar-nav ml-auto">
-					<li class="nav-item"><a class="nav-link" href="#section-home">Home</a></li>
+					<li class="nav-item"><a class="nav-link" href="main.jsp">Home</a></li>
 					<li class="nav-item"><a class="nav-link"
-						href="#section-contact">Contact</a></li>
+						href="feedback.jsp">Help</a></li>
 					<li class="nav-item cta-btn ml-xl-2 ml-lg-2 ml-md-0 ml-sm-0 ml-0"><a
 						class="nav-link" href="#" target="_blank" onclick="join()"><span
 							class="pb_rounded-4 px-4 rounded">Login</span></a></li>

@@ -6,7 +6,8 @@
 <meta charset="UTF-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <title>GoodHome</title>
-<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="viewport"
+	content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
 <link rel="stylesheet" type="text/css"
 	href="//fonts.googleapis.com/css?family=|Roboto+Sans:400,700|Playfair+Display:400,700">
@@ -20,19 +21,17 @@
 <link rel="stylesheet" href="fonts/ionicons/css/ionicons.min.css">
 <link rel="stylesheet" href="fonts/fontawesome/css/font-awesome.min.css">
 <link rel="stylesheet" href="css/style.css">
-<style type="text/css">
-.footer {
-	text-align: center;
-	background: #0b2352;
-	font-weight: bold;
-	color: white;
-	height: 50px;
-	padding: 10px
-}
-</style>
+<link rel="stylesheet" type="text/css" href="css/_custom.css" />
+
+<script type="text/javascript">
+	function join(){
+	    var popup = window.open('login/join.jsp', 'new',
+	    	'width=320px,height=400px,left=500, top=300');
+	}
+</script>
 </head>
 <body>
-<!-- Theme Style -->
+	<!-- Theme Style -->
 </head>
 <body data-spy="scroll" data-target="#templateux-navbar"
 	data-offset="200">
@@ -41,8 +40,8 @@
 		class="navbar navbar-expand-lg navbar-dark pb_navbar pb_scrolled-light"
 		id="templateux-navbar">
 		<div class="container">
-			<a class="navbar-brand" href="index.html"><span
-				class="text-danger">Good</span>Home</a>
+			<a class="navbar-brand" href="main.jsp"><span
+				class="text-danger">WHATNI</span></a>
 			<div class="site-menu-toggle js-site-menu-toggle  ml-auto"
 				data-aos="fade" data-toggle="collapse"
 				data-target="#templateux-navbar-nav"
@@ -56,9 +55,9 @@
 				<ul class="navbar-nav ml-auto">
 					<li class="nav-item"><a class="nav-link" href="#section-home">Home</a></li>
 					<li class="nav-item"><a class="nav-link"
-						href="#section-contact">Contact</a></li>
+						href="help/feedback.jsp">Help</a></li>
 					<li class="nav-item cta-btn ml-xl-2 ml-lg-2 ml-md-0 ml-sm-0 ml-0"><a
-						class="nav-link" href="#" target="_blank"><span
+						class="nav-link" href="#" target="_blank" onclick="join()"><span
 							class="pb_rounded-4 px-4 rounded">Login</span></a></li>
 				</ul>
 			</div>
@@ -80,20 +79,4 @@
 
 	</section>
 	<!-- END section -->
-
-
-
-<script src="js/jquery-3.3.1.min.js"></script>
-<script src="js/jquery-migrate-3.0.1.min.js"></script>
-<script src="js/popper.min.js"></script>
-<script src="js/bootstrap.min.js"></script>
-<script src="js/owl.carousel.min.js"></script>
-<script src="js/jquery.stellar.min.js"></script>
-<script src="js/jquery.fancybox.min.js"></script>
-<script src="js/jquery.easing.1.3.js"></script>
-<script src="js/aos.js"></script>
-<script src="js/bootstrap-datepicker.js"></script>
-<script src="js/jquery.timepicker.min.js"></script>
-<script src="js/main.js"></script>
-</body>
-</html>
+	<section class="py-5 bg-light" id="section-about">

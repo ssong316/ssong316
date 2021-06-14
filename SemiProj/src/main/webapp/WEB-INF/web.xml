@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+xmlns="http://xmlns.jcp.org/xml/ns/javaee" 
+xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_4_0.xsd" id="WebApp_ID" version="4.0">
+  <display-name>mystudy</display-name>
+  <welcome-file-list>
+    <welcome-file>index.html</welcome-file>
+    <welcome-file>index.htm</welcome-file>
+    <welcome-file>index.jsp</welcome-file>
+    <welcome-file>default.html</welcome-file>
+    <welcome-file>default.htm</welcome-file>
+    <welcome-file>default.jsp</welcome-file>
+  </welcome-file-list>
+
+  
+  	<servlet>
+		<servlet-name>nowServ</servlet-name>
+		<servlet-class>com.mystudy.serv.NowServlet</servlet-class>
+	</servlet>
+	
+	<servlet-mapping>
+		<servlet-name>nowServ</servlet-name>
+		<url-pattern>/NowServ2</url-pattern>
+	</servlet-mapping>
+	
+  	<servlet>
+		<servlet-name>insertServ</servlet-name>
+		<servlet-class>com.mystudy.pd.serv.InsertServlet</servlet-class>
+	</servlet>
+	
+	<servlet-mapping>
+		<servlet-name>insertServ</servlet-name>
+		<url-pattern>/InsertServ</url-pattern>
+	</servlet-mapping>
+	
+	<servlet>
+		<servlet-name>listServ</servlet-name>
+		<servlet-class>com.mystudy.pd.serv.ListServlet</servlet-class>
+	</servlet>
+	
+	<servlet-mapping>
+		<servlet-name>listServ</servlet-name>
+		<url-pattern>/ListServ</url-pattern>
+	</servlet-mapping>
+	
+	<servlet>
+		<servlet-name>detailServ</servlet-name>
+		<servlet-class>com.mystudy.pd.serv.DetailServlet</servlet-class>
+	</servlet>
+	
+	<servlet-mapping>
+		<servlet-name>detailServ</servlet-name>
+		<url-pattern>/DetailServ</url-pattern>
+	</servlet-mapping>
+
+	<servlet>
+		<servlet-name>deleteServ</servlet-name>
+		<servlet-class>com.mystudy.pd.serv.DeleteServlet</servlet-class>
+	</servlet>
+		
+	<servlet-mapping>
+		<servlet-name>deleteServ</servlet-name>
+		<url-pattern>/DeleteServ</url-pattern>	</servlet-mapping>
+
+	<servlet>
+		<servlet-name>editServ</servlet-name>
+		<servlet-class>com.mystudy.pd.serv.EditServlet</servlet-class>
+	</servlet>
+	
+	<servlet-mapping>
+		<servlet-name>editServ</servlet-name>
+		<url-pattern>/EditServ</url-pattern>
+	</servlet-mapping>
+
+	<servlet>
+		<servlet-name>edit_okServ</servlet-name>
+		<servlet-class>com.mystudy.pd.serv.Edit_okServlet</servlet-class>
+	</servlet>
+	
+	<servlet-mapping>
+		<servlet-name>edit_okServ</servlet-name>
+		<url-pattern>/Edit_okServ</url-pattern>
+	</servlet-mapping>
+	
+	<error-page>
+		<error-code>404</error-code>
+		<location>/sandbox/errorTest/404code.jsp</location>
+	</error-page>
+	
+	<!-- <error-page>
+		<error-code>500</error-code>
+		<location>/sandbox/errorTest/500code.jsp</location>
+	</error-page> -->
+  
+</web-app>

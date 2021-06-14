@@ -118,7 +118,19 @@ footer.footer {
     padding: 0px 10px 10px 10px;
 }
 
+/* 문의하기 form */
+.start form, .start {
+	width: 800px;
+	margin: 0 auto;
+}
 
+.form-group label{
+	font-size: 1.5em;
+}
+
+.start .bt{
+	text-align: center;
+}
 
 
 
