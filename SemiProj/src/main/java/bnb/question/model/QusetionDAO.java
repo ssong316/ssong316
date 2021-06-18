@@ -27,17 +27,17 @@ public class QusetionDAO {
 			
 			conn = pool.getConnection();
 			
-			String sql="insert into question(no, name, title, content)"
-					+ " values(QUESTION_SEQ.nextval, ?, ?, ?)";
+			String sql="insert into question(no, name, title, content, fileName,"
+					+ " fileSize, originalFileName)"
+					+ " values(QUESTION_SEQ.nextval, ?, ?, ?, ?, ?, ?)";
 			ps=conn.prepareStatement(sql);
 			ps.setString(1, vo.getName());
 			ps.setString(2, vo.getTitle());
 			ps.setString(3, vo.getContent());
-			/*
-			 * ps.setString(4, vo.getFileName()); ps.setLong(5, vo.getFileSize());
-			 * ps.setString(6, vo.getOriginalFileName());
-			 */
-			
+			ps.setString(4, vo.getFileName());
+			ps.setLong(5, vo.getFileSize());
+			ps.setString(6, vo.getOriginalFileName());
+			 
 			int cnt = ps.executeUpdate();
 			
 			System.out.println("문의글쓰기 결과, cnt = " +cnt + ", 매개변수 vo= " + vo);
@@ -71,6 +71,7 @@ public class QusetionDAO {
 				String content = rs.getString("content");
 				Timestamp regdate = rs.getTimestamp("regdate");
 				String delFlag = rs.getString("delFlag");
+				String filename = rs.getString("filename");
 				
 				QuestionVO vo = new QuestionVO(no, name, title, regdate, content, delFlag);
 				
@@ -107,6 +108,9 @@ public class QusetionDAO {
 				vo.setTitle(rs.getString("title"));
 				vo.setContent(rs.getString("content"));
 				vo.setRegdate(rs.getTimestamp("regdate"));
+				vo.setFileName(rs.getString("filename"));
+				vo.setOriginalFileName(rs.getString("originalFilename"));
+				vo.setFileSize(rs.getInt("filesize"));
 			}
 			
 			System.out.println("내용보기 조회결과, vo =" + vo +

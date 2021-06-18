@@ -55,7 +55,7 @@
 				<ul class="navbar-nav ml-auto">
 					<li class="nav-item"><a class="nav-link" href="main.jsp">Home</a></li>
 					<li class="nav-item"><a class="nav-link"
-						href="feedback.jsp">Help</a></li>
+						href="f_list2.jsp">Help</a></li>
 					<li class="nav-item cta-btn ml-xl-2 ml-lg-2 ml-md-0 ml-sm-0 ml-0"><a
 						class="nav-link" href="#" target="_blank" onclick="join()"><span
 							class="pb_rounded-4 px-4 rounded">Login</span></a></li>
@@ -95,7 +95,8 @@
 									<div class="icon">
 										<span class="icon-calendar"></span>
 									</div>
-									<input type="text" id="checkin_date" class="form-control">
+									<input type="text" id="checkin_date" class="form-control"
+										placeholder="날짜 선택">
 								</div>
 							</div>
 							<div class="col-md-6 mb-3 mb-lg-0 col-lg-3">
@@ -105,7 +106,8 @@
 									<div class="icon">
 										<span class="icon-calendar"></span>
 									</div>
-									<input type="text" id="checkout_date" class="form-control">
+									<input type="text" id="checkout_date" class="form-control"
+										placeholder="날짜 선택">
 								</div>
 							</div>
 							<div class="col-md-6 mb-3 mb-md-0 col-lg-3">
@@ -117,6 +119,7 @@
 												<span class="ion-ios-arrow-down"></span>
 											</div>
 											<select name="" id="adults" class="form-control">
+												<option value="">-추가-</option>
 												<option value="">1</option>
 												<option value="">2</option>
 												<option value="">3</option>
@@ -131,6 +134,7 @@
 												<span class="ion-ios-arrow-down"></span>
 											</div>
 											<select name="" id="children" class="form-control">
+												<option value="">-추가-</option>
 												<option value="">1</option>
 												<option value="">2</option>
 												<option value="">3</option>
@@ -149,6 +153,7 @@
 												<span class="ion-ios-arrow-down"></span>
 											</div>
 											<select name="" id="city" class="form-control">
+												<option value="">-선택-</option>
 												<option value="">서울</option>
 												<option value="">경기</option>
 												<option value="">인천</option>

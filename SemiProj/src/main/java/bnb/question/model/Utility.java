@@ -17,7 +17,7 @@ public class Utility {
 				result+="&nbsp";
 			}//for
 
-			result+="<img src='../images/re.gif'>";
+			result+="<img src='images/re.png'>";
 		}
 		return result;
 	}//
@@ -39,24 +39,11 @@ public class Utility {
 		return result;
 	}//
 	
-	public static String displayNew(Date regdate) {
-		//24시간 이내의 글인 경우 new 이미지 보여주기
-		Date today = new Date();	//오늘날짜
-		
-		long gap = (today.getTime() - regdate.getTime())/1000;
-		gap = gap/(60*60);	//시간으로 변환
-		
-		String result="";
-		if(gap<24) {
-			result="<img src='../images/new.gif'>";
-		}
-		return result;
-	}//
 	
 	public static String displayFile(String fileName) {
 		String result="";
 		if(fileName!=null && !fileName.isEmpty()) {
-			result="<img src='../images/file.gif' alt='file이미지'/>";
+			result="<img src='images/file.png' alt='file이미지'/>";
 		}
 		return result;
 	}//

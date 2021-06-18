@@ -53,9 +53,9 @@
 
 			<div class="collapse navbar-collapse" id="templateux-navbar-nav">
 				<ul class="navbar-nav ml-auto">
-					<li class="nav-item"><a class="nav-link" href="#section-home">Home</a></li>
+					<li class="nav-item"><a class="nav-link" href="main.jsp">Home</a></li>
 					<li class="nav-item"><a class="nav-link"
-						href="help/feedback.jsp">Help</a></li>
+						href="f_list2.jsp">Help</a></li>
 					<li class="nav-item cta-btn ml-xl-2 ml-lg-2 ml-md-0 ml-sm-0 ml-0"><a
 						class="nav-link" href="#" target="_blank" onclick="join()"><span
 							class="pb_rounded-4 px-4 rounded">Login</span></a></li>

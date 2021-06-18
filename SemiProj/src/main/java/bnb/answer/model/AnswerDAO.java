@@ -27,7 +27,7 @@ public class AnswerDAO {
 			conn = pool.getConnection();
 			
 			String sql="insert into answer(no, name, title, content)"
-					+ " values(ANSWER_SEQ.nextval, ?, ?, ?";
+					+ " values(ANSWER_SEQ.nextval, ?, ?, ?)";
 			ps=conn.prepareStatement(sql);
 			ps.setString(1, vo.getName());
 			ps.setString(2, vo.getTitle());

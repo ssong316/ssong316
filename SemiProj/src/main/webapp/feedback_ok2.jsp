@@ -34,7 +34,7 @@
 		 if(cnt>0){ %>
 			<script type="text/javascript">
 				alert('문의글이 등록되었습니다.');
-				location.href="f_list.jsp";
+				location.href="f_list2.jsp";
 			</script>				
 		<%}else{%>
 			<script type="text/javascript">
