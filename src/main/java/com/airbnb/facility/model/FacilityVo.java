@@ -12,7 +12,9 @@ public class FacilityVo {
 	private int bedroomCount;
 	private int bedCount;
 	private int bathroomCount;
-	
+	public FacilityVo() {
+		
+	}
 	
 	public FacilityVo(int kitchen, int wifi, int parking, int animal, int tv, int hairdryer, int airconditioner,
 			int amenityNo, int bedroomCount, int bedCount, int bathroomCount) {

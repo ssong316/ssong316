@@ -1,3 +1,5 @@
+<%@page import="com.airbnb.facility.model.FacilityVo"%>
+<%@page import="com.airbnb.review.model.ReviewVO"%>
 <%@page import="java.util.ArrayList"%>
 <%@page import="java.text.SimpleDateFormat"%>
 <%@page import="com.airbnb.reservation.model.ReservationVO"%>
@@ -9,27 +11,52 @@
     pageEncoding="UTF-8"%>
 <jsp:useBean id="amenityService" class="com.airbnb.amenity.model.AmenityService" scope="page"></jsp:useBean>
 <jsp:useBean id="reservationService" class="com.airbnb.reservation.model.ReservationService" scope="page"></jsp:useBean>
+<jsp:useBean id="reviewService" class="com.airbnb.review.model.ReviewService" scope="page"></jsp:useBean>
+<jsp:useBean id="facilityService" class="com.airbnb.facility.model.FacilityService" scope="page"></jsp:useBean>
 
 <%
 	AmenityVO vo =new AmenityVO();
 	List<ReservationVO> list = null;
+	List<ReviewVO> list2 = null;
+	FacilityVo vo3 = null;
+	SimpleDateFormat sdf2 = new SimpleDateFormat("yyyy년 MM월 dd일");
 	if(!request.getParameter("no").isEmpty() && request.getParameter("no")!=null){
 		int amenityNo = Integer.parseInt(request.getParameter("no"));
 		try{
 			vo = amenityService.selectByAmenityNo(amenityNo);
-		}catch(SQLException e){
-			e.printStackTrace();
-		}	
-	
-		
-		try{
 			list = reservationService.selectByAmenityNo(amenityNo);
+			list2 = reviewService.selectByAmenityNo(amenityNo);
+			vo3= facilityService.selectFacilityByAmenityNo(amenityNo);
 		}catch(SQLException e){
 			e.printStackTrace();
 		}
 			
 	}
 	
+	//평점 구하기(소수아래 둘째자리까지)
+	float sum_cleanGrade = 0f;
+	float sum_accuracyGrade = 0f;
+	float sum_communicationGrade=0f;
+	float sum_locationGrade=0f;
+	float sum_checkinGrade=0f;
+	float sum_satisfactionpriceGrade=0f;
+	
+	for(ReviewVO vo2 : list2){
+		sum_cleanGrade+=vo2.getCleanGrade();
+		sum_accuracyGrade+=vo2.getAccuracyGrade();
+		sum_communicationGrade+=vo2.getCommunicationGrade();
+		sum_locationGrade+=vo2.getLocationGrade();
+		sum_checkinGrade+=vo2.getCheckinGrade();
+	    sum_satisfactionpriceGrade+=vo2.getSatisfactionpriceGrade();	
+	}
+	
+	float avg_cleanGrade=Math.round((sum_cleanGrade/(float)list2.size())*100f)/100f;
+	float avg_accuracyGrade=Math.round((sum_accuracyGrade/(float)list2.size())*100f)/100f;
+	float avg_communicationGrade=Math.round((sum_communicationGrade/(float)list2.size())*100f)/100f;
+    float avg_locationGrade=Math.round((sum_locationGrade/(float)list2.size())*100f)/100f;
+    float avg_checkinGrade=Math.round((sum_checkinGrade/(float)list2.size())*100f)/100f;
+    float avg_satisfactionpriceGrade=Math.round((sum_satisfactionpriceGrade/(float)list2.size())*100f)/100f;
+    float total_grade=Math.round((avg_cleanGrade+avg_accuracyGrade+avg_communicationGrade+avg_locationGrade+avg_checkinGrade+avg_satisfactionpriceGrade)/6f*100f)/100f;
 	
 %>
 <!DOCTYPE html>
@@ -199,6 +226,22 @@
 	    margin-top: 20px;
 	}
 	
+	.col-md-6.col-lg-3.align-self-end {
+    width: 100%;
+	}
+	
+	button.btn.btn-info {
+	    width: 250px;
+	}
+	
+	button.btn.btn-info {
+	    margin-top: 20px;
+	}
+	
+	div#child {
+	    margin-left: 2px;
+	}
+
 </style>
 <script type="text/javascript">
 function getDatesStartToLast(startDate, lastDate) {
@@ -334,8 +377,8 @@ $(function(){
 		<div class="font" style="line-height:2">
 			<div id="leftside">
 				<img src="<%=request.getContextPath() %>/images/grade2.png" id="grade_image">
-				<span style="font-size:12px"> 4.42</span>
-				<span style="color:gray; font-size:12px">(후기)</span>
+				<span style="font-size:12px"> <%=total_grade%></span>
+				<a href="#" style="color:gray; font-size:12px;text-decoration: underline;">(후기 <%=list2.size() %> 개)</a>
 			</div>
 			<div id="rightside">
 				<div>
@@ -403,24 +446,25 @@ $(function(){
                    </div>
                  </div>
                </div>
-                <div class="row">
-                 <div class="col-md-6 mb-3 mb-md-0 col-lg-6">
-                     <div class="col-md-6 mb-3 mb-md-0">
-                       <label for="adults" class="font-weight-bold text-black">Adults</label>
-                       <div class="field-icon-wrap">
-                         <div class="icon"><span class="ion-ios-arrow-down"></span></div>
-                         <select name="" id="adults" class="form-control">
-                           <option value="">1</option>
-                           <option value="">2</option>
-                           <option value="">3</option>
-                           <option value="">4+</option>
-                         </select>
-                       </div>
-                     </div>
-                 </div>
-                 <div class="row">
+               	 <div class="row" id="adult">
+	                 <div class="col-md-6 mb-3 mb-md-0 col-lg-6">
+	                     <div class="col-md-6 mb-3 mb-md-0">
+	                       <label for="adults" class="font-weight-bold text-black">성인</label>
+	                       <div class="field-icon-wrap">
+	                         <div class="icon"><span class="ion-ios-arrow-down"></span></div>
+	                         <select name="" id="adults" class="form-control">
+	                           <option value="">1</option>
+	                           <option value="">2</option>
+	                           <option value="">3</option>
+	                           <option value="">4+</option>
+	                         </select>
+	                       </div>
+	                     </div>
+	                 </div>
+	                </div>
+                 <div class="row" id="child">
                      <div class="col-md-6 mb-3 mb-md-0 col-lg-6">
-                       <label for="children" class="font-weight-bold text-black">Children</label>
+                       <label for="children" class="font-weight-bold text-black">어린이</label>
                        <div class="field-icon-wrap">
                          <div class="icon"><span class="ion-ios-arrow-down"></span></div>
                          <select name="" id="children" class="form-control">
@@ -433,8 +477,9 @@ $(function(){
                      </div>
                  </div>
                  <div class="col-md-6 col-lg-3 align-self-end">
-                   <button class="btn btn-primary btn-block text-white">예약가능 여부보기</button>
+                   <button type="submit" class="btn btn-info">예약하기</button>
                  </div>
+                 
              </form>
            </div>
 
@@ -447,7 +492,7 @@ $(function(){
     		<div style="font-weight:bold; font-size:20px;height:50px;line-height: 2" class="font"><%=vo.getHostno() %>님이 호스팅하는 숙박 전체
     			<img id="profile_image" src="images/profile_image.png" style="height:100%; width:50px;float:right">
     		</div>
-    		<div>최대 인원 6명·침실 3개·침대2개·욕실1개</div>
+    		<div>최대 인원 6명·침실 <%=vo3.getBedroomCount() %>개·침대<%=vo3.getBedCount() %>개·욕실<%=vo3.getBathroomCount() %>개·주방<%=vo3.getKitchen() %>개</div>
     	</div>
     	<div>
     		
@@ -459,14 +504,23 @@ $(function(){
     		<div style="font-weight:bold; font-size:20px;height:50px;" class="font">숙소 편의시설
     		</div>
     		<div style="height:130px"> <!-- 편의시설 개수에 따라 높이 변경하도록 하기 -->
+    			<%if(vo3.getAirconditioner()>0){ %>
     			<div style="float:left; width:48%;padding:1px 0px;"><img src="images/facilities/airconditioner.png"><span> 에어컨</span></div>
+    			<%}if(vo3.getAnimal()>0){ %>
     			<div style="float:left; width:48%;padding:1px 0px;"><img src="images/facilities/animal.png"><span> 반려동물 입실 가능</span></div>
+    			<%}if(vo3.getWifi()>0){ %>
     			<div style="float:left; width:48%;padding:1px 0px;"><img src="images/facilities/wifi.png"><span> 무선 인터넷</span></div>
+    			<%}if(vo3.getKitchen()>0){%>
     			<div style="float:left; width:48%;padding:1px 0px;"><img src="images/facilities/dinner.png"><span> 주방</span></div>
+    			<%}if(vo3.getHairdryer()>0){ %>
     			<div style="float:left; width:48%;padding:1px 0px;"><img src="images/facilities/hairdryer.png"><span> 헤어 드라이어</span></div>
+    			<%} %>
     			<div style="float:left; width:48%;padding:1px 0px;"><img src="images/facilities/laundry.png"><span> 세탁기</span></div>
+    			<%if(vo3.getParking()>0){ %>
     			<div style="float:left; width:48%;padding:1px 0px;"><img src="images/facilities/parking.png"><span> 도로 주차 (무료)</span></div>
+    			<%}if(vo3.getTv()>0){ %>
     			<div style="float:left; width:48%;padding:1px 0px;"><img src="images/facilities/tv.png"><span> TV + 일반 케이블 TV</span></div>
+    			<%} %>
     		</div>
     		
     	</div>
@@ -476,69 +530,104 @@ $(function(){
     		<div id="map" style="height:500px">
     		</div>
     	</div>
-    	<div style="height:600px;padding:10px 0px;border-bottom:1px solid gray">
-    		<div style="font-weight:bold; font-size:20px;height:50px;" class="font"><img src="images/biggrade.png"> 4.88 · 후기 54개
+    	<div style="padding:10px 0px;border-bottom:1px solid gray">
+    		<div style="font-weight:bold; font-size:20px;height:50px;" class="font"><img src="images/biggrade.png"> <%=total_grade%> · 후기 <%=list2.size()%>개
     		</div>
     		<div style="height:80px;margin-top:5px"> 
     			<div style="float:left; width:100%;padding:3px 0px;">청결도
-	    			<div style="float:right;width:5%;margin-left:10px;margin-bottom:5px">3.24</div>
+	    			<div style="float:right;width:5%;margin-left:10px;margin-bottom:5px"><%=avg_cleanGrade %></div>
 	    			<div class="progress" style="float:right;width:50%">
-					  <div class="progress-bar" role="progressbar" aria-valuenow="63"
-					  aria-valuemin="0" aria-valuemax="100" style="width:70%">
+					  <div class="progress-bar" role="progressbar" aria-valuenow="<%=Math.floor(avg_cleanGrade/5.0f*100f) %>"
+					  aria-valuemin="0" aria-valuemax="100" style="width:<%=Math.floor(avg_cleanGrade/5.0f*100f) %>%">
 					    <span class="sr-only">70% Complete</span>
 					  </div>
 					</div>
 					
 				</div>
     			<div style="float:left; width:100%;padding:3px 0px;">정확성
-    			<div style="float:right;width:5%;margin-left:10px;margin-bottom:5px">3.01</div>
+    			<div style="float:right;width:5%;margin-left:10px;margin-bottom:5px"><%=avg_accuracyGrade %></div>
 	    			<div class="progress" style="float:right;width:50%">
-					  <div class="progress-bar" role="progressbar" aria-valuenow="63"
-					  aria-valuemin="0" aria-valuemax="100" style="width:60%">
+					  <div class="progress-bar" role="progressbar" aria-valuenow="<%=Math.floor(avg_accuracyGrade/5.0f*100f) %>"
+					  aria-valuemin="0" aria-valuemax="100" style="width:<%=Math.floor(avg_accuracyGrade/5.0f*100f) %>%">
 					    <span class="sr-only">70% Complete</span>
 					  </div>
 					</div>
 				</div>
     			<div style="float:left; width:100%;padding:3px 0px;">의사소통
-    			<div style="float:right;width:5%;margin-left:10px;margin-bottom:5px">2.54</div>
+    			<div style="float:right;width:5%;margin-left:10px;margin-bottom:5px"><%=avg_communicationGrade %></div>
 	    			<div class="progress" style="float:right;width:50%">
-					  <div class="progress-bar" role="progressbar" aria-valuenow="63"
-					  aria-valuemin="0" aria-valuemax="100" style="width:50%">
+					  <div class="progress-bar" role="progressbar" aria-valuenow="<%=Math.floor(avg_communicationGrade/5.0f*100f) %>"
+					  aria-valuemin="0" aria-valuemax="100" style="width:<%=Math.floor(avg_communicationGrade/5.0f*100f) %>%">
 					    <span class="sr-only">70% Complete</span>
 					  </div>
 					</div>
     			</div>
     			<div style="float:left; width:100%;padding:3px 0px;">위치
-    			<div style="float:right;width:5%;margin-left:10px;margin-bottom:5px">4.51</div>
+    			<div style="float:right;width:5%;margin-left:10px;margin-bottom:5px"><%=avg_locationGrade %></div>
 	    			<div class="progress" style="float:right;width:50%">
-					  <div class="progress-bar" role="progressbar" aria-valuenow="63"
-					  aria-valuemin="0" aria-valuemax="100" style="width:90%">
+					  <div class="progress-bar" role="progressbar" aria-valuenow=<%=Math.floor(avg_locationGrade/5.0f*100f) %>
+					  aria-valuemin="0" aria-valuemax="100" style="width:<%=Math.floor(avg_locationGrade/5.0f*100f) %>%">
 					    <span class="sr-only">70% Complete</span>
 					  </div>
 					</div>
     			</div>
     			<div style="float:left; width:100%;padding:3px 0px;">체크인
-    			<div style="float:right;width:5%;margin-left:10px;margin-bottom:5px">4.20</div>
+    			<div style="float:right;width:5%;margin-left:10px;margin-bottom:5px"><%=avg_checkinGrade %></div>
 	    			<div class="progress" style="float:right;width:50%">
-					  <div class="progress-bar" role="progressbar" aria-valuenow="63"
-					  aria-valuemin="0" aria-valuemax="100" style="width:85%">
+					  <div class="progress-bar" role="progressbar" aria-valuenow="<%=Math.floor(avg_checkinGrade/5.0f*100f) %>"
+					  aria-valuemin="0" aria-valuemax="100" style="width:<%=Math.floor(avg_checkinGrade/5.0f*100f) %>%">
 					    <span class="sr-only">70% Complete</span>
 					  </div>
 					</div>
     			</div>
     			<div style="float:left; width:100%;padding:3px 0px;">가격대비 만족도
-    				<div style="float:right;width:5%;margin-left:10px;margin-bottom:5px">4.92</div>
+    				<div style="float:right;width:5%;margin-left:10px;margin-bottom:5px"><%=avg_satisfactionpriceGrade %></div>
 	    			<div class="progress" style="float:right;width:50%">
-					  <div class="progress-bar" role="progressbar" aria-valuenow="63"
-					  aria-valuemin="0" aria-valuemax="100" style="width:95%">
+					  <div class="progress-bar" role="progressbar" aria-valuenow="<%=Math.floor(avg_satisfactionpriceGrade/5.0f*100f) %>"
+					  aria-valuemin="0" aria-valuemax="100" style="width:<%=Math.floor(avg_satisfactionpriceGrade/5.0f*100f) %>%">
 					    <span class="sr-only">70% Complete</span>
 					  </div>
 					</div>
     			</div>
     		</div>
+    		<div>
+    			<%
+    				if(list2.size()==0){%>
+    					등록된 후기가 없습니다.
+    				<%}else{
+    				for(int i=0;i<5;i++){
+    					if(list2.size()==i){
+    						break;
+    					}
+    					ReviewVO vo2=list2.get(i);
+    					%>
+    					<span>
+    						<img src="images/profiles/<%=vo2.getUserid()%>.jpeg" style="width:50px; height:50px; border-radius:25px;">
+    					</span>
+    					<span>
+				    		<span style="font-weight:bold;margin-left:20px; font-size:15px"><%=vo2.getUsername() %> 님의 후기
+				    		</span>
+				    		<div style="font-size:12px; color:gray"><%=sdf2.format(vo2.getRegdate())%>
+				    		</div>
+	    				</span>
+			    		<div><%=vo2.getContent() %>
+			    		</div>
+    					<%
+    				}
+    				%>
+    				<div class="btn btn-primary" style="margin:10px 10px">후기 <%=list2.size() %>개 모두 보기
+			    	</div>
+			    	<%
+    				}
+    			%>
+	    		
+    		</div>
+    	</div>
+    	<div style="height:600px;padding:10px 0px;border-bottom:1px solid gray">
+    		
     	</div>
     </div>
-
+	
 	
 </body>
 </html>

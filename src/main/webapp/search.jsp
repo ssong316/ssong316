@@ -32,7 +32,50 @@
 	 a:visited { color: black; text-decoration: none;}
 	 
 
+	
+	.button-hover-like {
+	  border: 2px solid #767676;
+	  background: transparent;
+	  color: #767676;
+	  text-transform: uppercase;
+	  overflow: hidden;
+	  letter-spacing: 0.07rem;
+	  transition: all 0.2s ease-in-out;
+	  position: relative;
+	}
+	
+	.button-hover-like span {
+	  transition: all 0.2s ease-in-out;
+	}
+	
+	.button-hover-like .fa {
+	  position: absolute;
+	  font-size: 1.2rem;
+	  top: 50%;
+	  -webkit-transform: translateY(-50%);
+	      -ms-transform: translateY(-50%);
+	          transform: translateY(-50%);
+	  color: #F15261;
+	  right: -20px;
+	  transition: 0.4s right cubic-bezier(0.38, 0.6, 0.48, 1);
+	}
+	
+	.button-hover-like:hover {
+	  border-color: #1779ba;
+	  background: transparent;
+	  transition: border-color 0.2s;
+	}
+	
+	.button-hover-like:hover span {
+	  margin-right: 20px;
+	  color: #1779ba;
+	}
+	
+	.button-hover-like:hover .fa {
+	  right: 10px;
+	}
 
+	
 
 </style>
 </head>
@@ -167,6 +210,7 @@
 												</h6>
 											</div>
 									    </p>
+									    <button class="button-hover-like button"><span>위시리스트에 담기</span><i class="fa fa-heart"></i></button>
 									    <a href="detail.jsp?no=<%=vo.getAmenityNo()%>" class="btn btn-primary">자세히 보기</a>
 								  	</div>
 								</div>
@@ -212,7 +256,6 @@
 		  });
 	  contentString =
 		    '<h1 id="firstHeading" class="firstHeading"><%=vo.getLocation()%></h1>' +
-		    '<p><%=vo.getContent()%></p>'+
 		    '<image src="images/<%=vo.getImage()%>">';
 	  priceString=
 		  	'<div style="width:60px; height:20px; font-weight:bold">₩ <%=vo.getPrice()%></div>';
@@ -242,8 +285,8 @@
 		  //가격은 항상 보이게
 	<%}}
 	%>
-	};
-	}
+	}};
+	
 	</script>
 	<!-- Async script executes immediately and must be after any DOM elements used in callback. -->
     <script

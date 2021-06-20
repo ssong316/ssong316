@@ -3,7 +3,7 @@ package com.airbnb.review.model;
 import java.sql.Timestamp;
 
 public class ReviewVO {
-	private int grader;
+	private int grade;
 	private String content;
 	private int userno;
 	private int amenity;
@@ -14,11 +14,41 @@ public class ReviewVO {
     private int checkinGrade;
     private int satisfactionpriceGrade;
     private Timestamp regdate;
-	public ReviewVO(int grader, String content, int userno, int amenity, int cleanGrade, int accuracyGrade,
-			int communicationGrade, int locationGrade, int checkinGrade, int satisfactionpriceGrade,
-			Timestamp regdate) {
+    private String username;
+    private String userid;
+    
+    public String getUsername() {
+		return username;
+	}
+	public void setUsername(String username) {
+		this.username = username;
+	}
+	public ReviewVO() {
+    	
+    }
+	
+	
+	
+	
+	public String getUserid() {
+		return userid;
+	}
+	public void setUserid(String userid) {
+		this.userid = userid;
+	}
+	@Override
+	public String toString() {
+		return "ReviewVO [grade=" + grade + ", content=" + content + ", userno=" + userno + ", amenity=" + amenity
+				+ ", cleanGrade=" + cleanGrade + ", accuracyGrade=" + accuracyGrade + ", communicationGrade="
+				+ communicationGrade + ", locationGrade=" + locationGrade + ", checkinGrade=" + checkinGrade
+				+ ", satisfactionpriceGrade=" + satisfactionpriceGrade + ", regdate=" + regdate + ", username="
+				+ username + ", userid=" + userid + "]";
+	}
+	public ReviewVO(int grade, String content, int userno, int amenity, int cleanGrade, int accuracyGrade,
+			int communicationGrade, int locationGrade, int checkinGrade, int satisfactionpriceGrade, Timestamp regdate,
+			String username, String userid) {
 		super();
-		this.grader = grader;
+		this.grade = grade;
 		this.content = content;
 		this.userno = userno;
 		this.amenity = amenity;
@@ -29,19 +59,14 @@ public class ReviewVO {
 		this.checkinGrade = checkinGrade;
 		this.satisfactionpriceGrade = satisfactionpriceGrade;
 		this.regdate = regdate;
+		this.username = username;
+		this.userid = userid;
 	}
-	@Override
-	public String toString() {
-		return "ReviewVO [grader=" + grader + ", content=" + content + ", userno=" + userno + ", amenity=" + amenity
-				+ ", cleanGrade=" + cleanGrade + ", accuracyGrade=" + accuracyGrade + ", communicationGrade="
-				+ communicationGrade + ", locationGrade=" + locationGrade + ", checkinGrade=" + checkinGrade
-				+ ", satisfactionpriceGrade=" + satisfactionpriceGrade + ", regdate=" + regdate + "]";
+	public int getGrade() {
+		return grade;
 	}
-	public int getGrader() {
-		return grader;
-	}
-	public void setGrader(int grader) {
-		this.grader = grader;
+	public void setGrade(int grade) {
+		this.grade = grade;
 	}
 	public String getContent() {
 		return content;
