@@ -80,6 +80,11 @@
 <link rel="stylesheet" href="css/style.css">
 <script src="https://polyfill.io/v3/polyfill.min.js?features=default"></script>
 <script type="text/javascript">
+
+	
+	
+	
+	
 	let map;
 	let contentString;
 	let priceString;
@@ -242,6 +247,13 @@
 	    margin-left: 2px;
 	}
 
+	.modal-content{
+	overflow-y: initial !important
+	}
+	.modal-body{
+	height: 250px;
+	overflow-y: auto;
+	}
 </style>
 <script type="text/javascript">
 function getDatesStartToLast(startDate, lastDate) {
@@ -261,6 +273,14 @@ function getDatesStartToLast(startDate, lastDate) {
 
 $(function(){
 	
+	$('#showAllReviews').click(function(e){
+		e.preventDefault();
+		$('#reviewModal').modal("show");
+	});
+	
+	$('.modal-footer>button').click(function(){
+		$('#reviewModal').modal("hide");
+	});
 	
 	let res=[];
 	let temp;
@@ -610,13 +630,46 @@ $(function(){
 				    		<div style="font-size:12px; color:gray"><%=sdf2.format(vo2.getRegdate())%>
 				    		</div>
 	    				</span>
-			    		<div><%=vo2.getContent() %>
+			    		<div style="margin-bottom:20px"><%=vo2.getContent() %>
 			    		</div>
     					<%
     				}
     				%>
-    				<div class="btn btn-primary" style="margin:10px 10px">후기 <%=list2.size() %>개 모두 보기
+    				<div id="showAllReviews" class="btn btn-primary" style="margin:10px 10px">후기 <%=list2.size() %>개 모두 보기
 			    	</div>
+			    	<div class="modal fade" id="reviewModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+						<div class="modal-dialog" role="document">
+							<div class="modal-content">
+								<div class="modal-header">
+									<h5 class="modal-title" id="exampleModalLabel"><%=list2.size() %>개의 후기</h5>
+									<button class="close" type="button" data-dismiss="modal" aria-label="Close">
+										<span aria-hidden="true">X</span>
+									</button>
+								</div>
+								<div class="modal-body">
+								<%
+								for(int i=0;i<list2.size();i++){
+			    					ReviewVO vo2=list2.get(i);
+			    					%>
+			    					<span>
+			    						<img src="images/profiles/<%=vo2.getUserid()%>.jpeg" style="width:50px; height:50px; border-radius:25px;">
+			    					</span>
+			    					<span>
+							    		<span style="font-weight:bold;margin-left:20px; font-size:15px"><%=vo2.getUsername() %> 님의 후기
+							    		</span>
+							    		<div style="font-size:12px; color:gray"><%=sdf2.format(vo2.getRegdate())%>
+							    		</div>
+				    				</span>
+						    		<div style="margin-bottom:20px"><%=vo2.getContent() %>
+						    		</div>
+								<%} %>
+								</div>
+								<div class="modal-footer">
+									<button class="btn" type="button" data-dismiss="modal">닫기</button>
+								</div>
+							</div>
+						</div>
+					</div>
 			    	<%
     				}
     			%>
