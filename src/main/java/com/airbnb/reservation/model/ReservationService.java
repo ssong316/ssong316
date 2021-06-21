@@ -17,4 +17,9 @@ public int insertReservation(ReservationVO vo) throws SQLException {
 	
 	return dao.insertReservation(vo);
 }
+
+public List<ReservationVO> selectMyReservation(int userNo) throws SQLException {
+	
+	return dao.selectMyReservation(userNo);
+}
 }

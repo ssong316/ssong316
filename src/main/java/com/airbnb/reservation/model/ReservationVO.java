@@ -11,6 +11,42 @@ public class ReservationVO {
 	private int payment;
 	private Timestamp startdate;
 	private Timestamp enddate;
+	private String location;
+	private String content;
+	private String image;
+	private String title;
+	private int hostno;
+	
+	public int getHostno() {
+		return hostno;
+	}
+	public void setHostno(int hostno) {
+		this.hostno = hostno;
+	}
+	public String getLocation() {
+		return location;
+	}
+	public void setLocation(String location) {
+		this.location = location;
+	}
+	public String getContent() {
+		return content;
+	}
+	public void setContent(String content) {
+		this.content = content;
+	}
+	public String getImage() {
+		return image;
+	}
+	public void setImage(String image) {
+		this.image = image;
+	}
+	public String getTitle() {
+		return title;
+	}
+	public void setTitle(String title) {
+		this.title = title;
+	}
 	public int getReservationNo() {
 		return reservationNo;
 	}

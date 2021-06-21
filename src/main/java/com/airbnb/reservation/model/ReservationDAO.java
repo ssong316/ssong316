@@ -16,6 +16,7 @@ public class ReservationDAO {
 		pool=ConnectionPoolMgr1.getInstance();
 	}
 	
+	
 	public List<ReservationVO> selectByAmenityNo(int amenityNo) throws SQLException {
 		Connection conn = null;
 		PreparedStatement ps = null;
@@ -31,6 +32,39 @@ public class ReservationDAO {
 				ReservationVO vo = new ReservationVO();
 				vo.setStartdate(rs.getTimestamp(1));
 				vo.setEnddate(rs.getTimestamp(2));
+				list.add(vo);
+			}
+			return list;
+		}finally {
+			pool.dbClose(rs, ps,conn);
+			
+		}
+	}
+	
+	public List<ReservationVO> selectMyReservation(int userNo) throws SQLException {
+		Connection conn = null;
+		PreparedStatement ps = null;
+		ResultSet rs = null;
+		try {
+			conn=pool.getConnection();
+			String sql="select a.*,b.* from reservation a join amenity b on a.amenityno=b.amenityno where userno=?";
+			ps= conn.prepareStatement(sql);
+			ps.setInt(1, userNo);
+			rs= ps.executeQuery();
+			List<ReservationVO> list = new ArrayList<ReservationVO>();
+			while(rs.next()) {
+				ReservationVO vo = new ReservationVO();
+				vo.setAdultCount(rs.getInt("adultcount"));
+				vo.setChildCount(rs.getInt("childcount"));
+				vo.setPayment(rs.getInt("payment"));
+				vo.setStartdate(rs.getTimestamp("startdate"));
+				vo.setEnddate(rs.getTimestamp("enddate"));
+				vo.setAmenityNo(rs.getInt("amenityno"));
+				vo.setContent(rs.getString("content"));
+				vo.setImage(rs.getString("image"));
+				vo.setHostno(rs.getInt("hostno"));
+				vo.setLocation(rs.getString("location"));
+				vo.setTitle(rs.getString("title"));
 				list.add(vo);
 			}
 			return list;
