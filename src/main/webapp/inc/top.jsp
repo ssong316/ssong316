@@ -11,7 +11,8 @@
 
 <body>
 	<header>
-		<div>WhatNee</div>
+		<div><a class="navbar-brand" href="main.jsp"><span
+				class="text-danger">What</span>Ni</a></div>
 		<div>
 			<div id="host">호스트 모드로 전환</div>
 			<div id="member"><img id="menubar" src="<%=request.getContextPath()%>/images/menubar.png"><img id="profile" src="<%=request.getContextPath() %>/images/profile.png"></div>

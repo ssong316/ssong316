@@ -40,6 +40,28 @@ public class ReservationDAO {
 		}
 	}
 	
-	
+	public int insertReservation(ReservationVO vo) throws SQLException {
+		Connection conn = null;
+		PreparedStatement ps = null;
+		
+		try {
+			conn=pool.getConnection();
+			String sql = "insert into reservation values(reservation_seq.nextval,?,?,?,?,?,?,?)";
+			ps= conn.prepareStatement(sql);
+			ps.setInt(1, vo.getAdultCount());
+			ps.setInt(2, vo.getChildCount());
+			ps.setInt(3, vo.getUserNo());
+			ps.setInt(4, vo.getAmenityNo());
+			ps.setInt(5, vo.getPayment());
+			ps.setTimestamp(6, vo.getStartdate());
+			ps.setTimestamp(7, vo.getEnddate());
+			
+			int cnt= ps.executeUpdate();
+			return cnt;
+		}finally {
+			pool.dbClose(ps,conn);
+			
+		}
+	}
 	
 }

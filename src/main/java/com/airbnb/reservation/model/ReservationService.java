@@ -12,4 +12,9 @@ private ReservationDAO dao;
 public List<ReservationVO> selectByAmenityNo(int amenityNo) throws SQLException {
 	return dao.selectByAmenityNo(amenityNo);
 }
+
+public int insertReservation(ReservationVO vo) throws SQLException {
+	
+	return dao.insertReservation(vo);
+}
 }

@@ -86,6 +86,7 @@ public class MessageDAO {
          conn = pool.getConnection();
 
          String sql="select a.*,b.name,b.id from message a join acc b on (a.sender=b.accno) where a.sender=? or a.receiver=?";
+         
          ps = conn.prepareStatement(sql);
          ps.setInt(1, no);
          ps.setInt(2, no);

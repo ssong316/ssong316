@@ -20,8 +20,9 @@
 	List<ReviewVO> list2 = null;
 	FacilityVo vo3 = null;
 	SimpleDateFormat sdf2 = new SimpleDateFormat("yyyy년 MM월 dd일");
+	int amenityNo = Integer.parseInt(request.getParameter("no"));;
 	if(!request.getParameter("no").isEmpty() && request.getParameter("no")!=null){
-		int amenityNo = Integer.parseInt(request.getParameter("no"));
+		
 		try{
 			vo = amenityService.selectByAmenityNo(amenityNo);
 			list = reservationService.selectByAmenityNo(amenityNo);
@@ -32,7 +33,6 @@
 		}
 			
 	}
-	
 	//평점 구하기(소수아래 둘째자리까지)
 	float sum_cleanGrade = 0f;
 	float sum_accuracyGrade = 0f;
@@ -251,7 +251,7 @@
 	overflow-y: initial !important
 	}
 	.modal-body{
-	height: 250px;
+	height: 500px;
 	overflow-y: auto;
 	}
 </style>
@@ -447,13 +447,13 @@ $(function(){
 	<div class="container" id="scroll" >  
          <div class="row check-availabilty" id="next">
            <div class="block-32" data-aos="fade-up" data-aos-offset="-200">
-           <form action="#">
+           <form action="reservation.jsp?no=<%=amenityNo %>" method="post">
                <div class="row">
                  <div class="col-md-6 mb-3 mb-lg-0 col-lg-6">
                    <label for="checkin_date" class="font-weight-bold text-black">체크 인</label>
                    <div class="field-icon-wrap">
                      <div class="icon"><span class="icon-calendar"></span></div>
-                     <input type="text" id="checkin_date" class="form-control">
+                     <input type="text" id="checkin_date" class="form-control" name="checkin">
                    </div>
                  </div>
                </div>
@@ -462,7 +462,7 @@ $(function(){
                    <label for="checkout_date" class="font-weight-bold text-black" >체크 아웃</label>
                    <div class="field-icon-wrap">
                      <div class="icon"><span class="icon-calendar"></span></div>
-                     <input type="text" id="checkout_date" class="form-control">
+                     <input type="text" id="checkout_date" class="form-control" name="checkout">
                    </div>
                  </div>
                </div>
@@ -472,11 +472,11 @@ $(function(){
 	                       <label for="adults" class="font-weight-bold text-black">성인</label>
 	                       <div class="field-icon-wrap">
 	                         <div class="icon"><span class="ion-ios-arrow-down"></span></div>
-	                         <select name="" id="adults" class="form-control">
-	                           <option value="">1</option>
-	                           <option value="">2</option>
-	                           <option value="">3</option>
-	                           <option value="">4+</option>
+	                         <select name="adults" id="adults" class="form-control">
+	                           <option value="1">1</option>
+	                           <option value="2">2</option>
+	                           <option value="3">3</option>
+	                           <option value="4">4+</option>
 	                         </select>
 	                       </div>
 	                     </div>
@@ -487,11 +487,11 @@ $(function(){
                        <label for="children" class="font-weight-bold text-black">어린이</label>
                        <div class="field-icon-wrap">
                          <div class="icon"><span class="ion-ios-arrow-down"></span></div>
-                         <select name="" id="children" class="form-control">
-                           <option value="">1</option>
-                           <option value="">2</option>
-                           <option value="">3</option>
-                           <option value="">4+</option>
+                         <select name="children" id="children" class="form-control">
+                           <option value="1">1</option>
+                           <option value="2">2</option>
+                           <option value="3">3</option>
+                           <option value="4">4+</option>
                          </select>
                        </div>
                      </div>
@@ -638,7 +638,7 @@ $(function(){
     				<div id="showAllReviews" class="btn btn-primary" style="margin:10px 10px">후기 <%=list2.size() %>개 모두 보기
 			    	</div>
 			    	<div class="modal fade" id="reviewModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-						<div class="modal-dialog" role="document">
+						<div class="modal-dialog modal-lg" role="document">
 							<div class="modal-content">
 								<div class="modal-header">
 									<h5 class="modal-title" id="exampleModalLabel"><%=list2.size() %>개의 후기</h5>

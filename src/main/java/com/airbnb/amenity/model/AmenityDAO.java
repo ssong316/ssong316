@@ -29,7 +29,7 @@ public class AmenityDAO {
 
 	         //3
 	         String sql="select * from amenity where ?>=startdate and ?<=enddate and location like '%' || ? || '%' and ?<=remain";
-
+	         
 	         ps=conn.prepareStatement(sql);
 	         ps.setString(1, cindate);
 	         ps.setString(2, coutdate);

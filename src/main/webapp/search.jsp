@@ -124,7 +124,7 @@
 	}
 	
 	//화면에 표시할 날짜 string 구하기 
-		String coutdate2 = arr[2]+"년 "+(coutm+1)+"월 "+arr[0]+"일";
+	String coutdate2 = arr[2]+"년 "+(coutm+1)+"월 "+arr[0]+"일";
 	
 	Date d = new Date(ciny,cinm,cind);
 	SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
