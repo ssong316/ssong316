@@ -12,22 +12,24 @@
 <body>
 	<%
       request.setCharacterEncoding("utf-8");
-   
       String content = request.getParameter("content");
-      String name = request.getParameter("name");
+      int sender = Integer.parseInt(request.getParameter("sender"));
+      int receiver = Integer.parseInt(request.getParameter("receiver"));
       
-      try{   
       	MessageDAO dao = new MessageDAO();
       	MessageVO vo = new MessageVO();
       	vo.setContent(content);
-      	vo.setName(name);
-      	
-      	int cnt = dao.insertMsg(vo);
-		 
+      	vo.setReceiver(receiver);
+      	vo.setSender(sender);
+      	int cnt=0;
+      	try{
+      	cnt = dao.insertMsg(vo);
+      	}catch(SQLException e){
+      		e.printStackTrace();
+      	}
 		if(cnt>0){ %>
 			<script type="text/javascript">
-				alert('문의글이 등록되었습니다.');
-				location.href="showmsg.jsp";
+				location.href="<%=request.getContextPath()%>/showmsg.jsp?receiver=<%=receiver%>"; 
 			</script>				
 	<%	}else{%>
 			<script type="text/javascript">
@@ -35,9 +37,6 @@
 				history.back();
 			</script>				
 	<%	}
-      }catch(SQLException e){
-      		e.printStackTrace();
-	  }	
 %>
    
 </body>

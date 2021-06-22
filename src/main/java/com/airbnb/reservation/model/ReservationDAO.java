@@ -47,7 +47,7 @@ public class ReservationDAO {
 		ResultSet rs = null;
 		try {
 			conn=pool.getConnection();
-			String sql="select a.*,b.* from reservation a join amenity b on a.amenityno=b.amenityno where userno=?";
+			String sql="select a.*,b.* from reservation a join amenity b on a.amenityno=b.amenityno where userno=? order by a.startdate";
 			ps= conn.prepareStatement(sql);
 			ps.setInt(1, userNo);
 			rs= ps.executeQuery();

@@ -27,4 +27,9 @@ public class AccService {
 	public AccVO selectByUserid(String userid, String pwd) throws SQLException {
 		return accDao.selectByUserid(userid, pwd);
 	}
+	
+	public AccVO selectByHostno(int no) throws SQLException {
+		return accDao.selectByHostno(no);
+	}
+	
 }

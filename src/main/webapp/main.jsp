@@ -145,10 +145,10 @@ footer.footer {
 							<div class="dropdown">
 							<div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
 								<div class="ddi1">
-									<a class="dropdown-item" href="#">메시지</a> 
+									<a class="dropdown-item" href="<%=request.getContextPath()%>/sendmsg.jsp">메시지</a> 
 									<a class="dropdown-item" href="<%=request.getContextPath()%>/n_list.jsp">알림</a> 
-									<a class="dropdown-item" href="#">여행</a> 
-									<a class="dropdown-item" href="">위시리스트</a>
+									<a class="dropdown-item" href="<%=request.getContextPath()%>/mytrip.jsp">여행</a> 
+									<a class="dropdown-item" href="#">위시리스트</a>
 								</div>
 								<hr>
 								<a class="dropdown-item" href="#">호스트되기</a> 
@@ -189,8 +189,8 @@ footer.footer {
                <form action="search.jsp" method="post">
                   <div class="row">
                      <div class="col-md-6 mb-3 mb-lg-0 col-lg-3">
-                        <label for="checkin_date" class="font-weight-bold text-black">Check
-                           In</label>
+                        <label for="checkin_date" class="font-weight-bold text-black">체크 인
+                           </label>
                         <div class="field-icon-wrap">
                            <div class="icon">
                               <span class="icon-calendar"></span>
@@ -199,8 +199,7 @@ footer.footer {
                         </div>
                      </div>
                      <div class="col-md-6 mb-3 mb-lg-0 col-lg-3">
-                        <label for="checkout_date" class="font-weight-bold text-black">Check
-                           Out</label>
+                        <label for="checkout_date" class="font-weight-bold text-black">체크 아웃</label>
                         <div class="field-icon-wrap">
                            <div class="icon">
                               <span class="icon-calendar"></span>
@@ -211,7 +210,7 @@ footer.footer {
                      <div class="col-md-6 mb-3 mb-md-0 col-lg-3">
                         <div class="row">
                            <div class="col-md-6 mb-3 mb-md-0">
-                              <label for="adults" class="font-weight-bold text-black">Adults</label>
+                              <label for="adults" class="font-weight-bold text-black">성인</label>
                               <div class="field-icon-wrap">
                                  <div class="icon">
                                     <span class="ion-ios-arrow-down"></span>
@@ -225,7 +224,7 @@ footer.footer {
                               </div>
                            </div>
                            <div class="col-md-6 mb-3 mb-md-0">
-                              <label for="children" class="font-weight-bold text-black">Children</label>
+                              <label for="children" class="font-weight-bold text-black">어린이</label>
                               <div class="field-icon-wrap">
                                  <div class="icon">
                                     <span class="ion-ios-arrow-down"></span>
@@ -248,12 +247,7 @@ footer.footer {
                                  <div class="icon">
                                     <span class="ion-ios-arrow-down"></span>
                                  </div>
-                                 <select name="location" id="city" class="form-control">
-                                    <option value="서울">서울</option>
-                                    <option value="경기">경기</option>
-                                    <option value="인천">인천</option>
-                                    <option value="제주">제주</option>
-                                 </select> 
+                                 <input type="text"  class="form-control" name="location">
                               </div>
                            </div>
                            <div class="col-md-6 mb-3 mb-md-0">

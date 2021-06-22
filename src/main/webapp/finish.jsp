@@ -74,7 +74,7 @@ body {
                 <div class="card-body cart">
                     <div class="col-sm-12 empty-cart-cls text-center"> <img src="https://i.imgur.com/dCdflKN.png" width="130" height="130" class="img-fluid mb-4 mr-3">
                         <h3><strong>결제가 성공적으로 완료되었습니다 !</strong></h3>
-                        <h4>결제된 나의 여행정보를 조회하세요 !</h4> <a href="#" class="btn btn-primary cart-btn-transform m-3" data-abc="true">나의 예약보기</a>
+                        <h4>결제된 나의 여행정보를 조회하세요 !</h4> <a href="<%=request.getContextPath() %>/mytrip.jsp" class="btn btn-primary cart-btn-transform m-3" data-abc="true">나의 예약보기</a>
                     </div>
                 </div>
             </div>

@@ -65,8 +65,6 @@
 MessageDAO dao = new MessageDAO();
 List<MessageVO> list = null;
 int no=Integer.parseInt((String)session.getAttribute("no"));
-int rece = Integer.parseInt(request.getParameter("receiver"));
-System.out.println("no = " + no + "rece = " + rece);
 String myname =(String)session.getAttribute("name");
 String userid=(String)session.getAttribute("login_id");
 try {
@@ -102,7 +100,7 @@ SimpleDateFormat sd = new SimpleDateFormat("yyyy-MM-dd HH시 mm분");
 			<img src="<%=request.getContextPath() %>/images/profiles/<%=userid %>.jpeg" style="width:40px; height:40px; border-radius:20px;">
 			<label style="font-weight:bold;font-size:17px"><%=myname%> (나)</label> <span style="color:gray; font-size:12px"><%=sd.format(vo.getRegdate())%></span>
 		</div>
-			<%}else if(rece==vo.getSender()){
+			<%}else{
 				%>
 		<div class="testimonial-block-vertical" style="margin-right:30px;float:right;width:90%">
 			<div class="testimonial-block-vertical-quote" style="width:50%;border-radius:10px;float:right" >
@@ -123,15 +121,11 @@ SimpleDateFormat sd = new SimpleDateFormat("yyyy-MM-dd HH시 mm분");
 		%>
 	</div>
 	<div style="text-align: center; margin-bottom: 20px;">
-	<form action="<%=request.getContextPath() %>/sendmsg_ok.jsp" method="post">;
 	<div class="form-group" style="width: 500px; margin-left: 100px">
-		<input type="hidden" name="sender" value="<%=no %>">
-		<input type="hidden" name="receiver" value="<%=rece %>">
 		<input type="text" class="form-control" id="name"
-			name="content" placeholder="메시지를 입력하세요(최대 500자)">
+			name="name" placeholder="메시지를 입력하세요">
 	</div>
 		<button type="submit" class="btn btn-info" id="send"
-			>전송</button>
-	</form>
+			onclick="location.href='sendmsg_ok.jsp'">전송</button>
 	</div>	
 </div>

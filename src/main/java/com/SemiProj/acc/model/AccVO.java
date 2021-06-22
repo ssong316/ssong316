@@ -10,7 +10,14 @@ public class AccVO {
 	private String email;
 	private String pn;
 	private int point;
+	private String hostContent;
 	
+	public String getHostContent() {
+		return hostContent;
+	}
+	public void setHostContent(String hostContent) {
+		this.hostContent = hostContent;
+	}
 	public AccVO() {
 	
 	}

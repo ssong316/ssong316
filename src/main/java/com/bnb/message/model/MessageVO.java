@@ -17,6 +17,18 @@ public class MessageVO {
 	 private String senderName;
 	 private String senderId;
 	 
+	 public MessageVO() {
+		// TODO Auto-generated method stub
+
+	}
+	 public MessageVO(int msgno, String content, int sender, int receiver, Timestamp regdate) {
+			super();
+			this.msgno = msgno;
+			this.content = content;
+			this.sender = sender;
+			this.receiver = receiver;
+			this.regdate = regdate;
+		}
 	public MessageVO(int msgno, String content, int sender, int receiver, Timestamp regdate, String senderName,
 			String senderId) {
 		super();

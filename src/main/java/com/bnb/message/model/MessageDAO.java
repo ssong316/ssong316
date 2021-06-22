@@ -17,36 +17,9 @@ public class MessageDAO {
 
    public MessageDAO() {
       pool = new ConnectionPoolMgr();
-   }//
+   }
 
-   /*
-   public int insertMsg(MessageVO vo) throws SQLException {
-
-      Connection conn = null;
-      PreparedStatement ps = null;
-
-      try {
-
-         conn = pool.getConnection();
-
-         String sql="insert into message(msgno, content, name, hno)"
-               + " values(msg_seq.nextval, ?, ?, ?)";
-         ps = conn.prepareStatement(sql);
-         ps.setString(1, vo.getContent());
-         ps.setString(2, vo.getName());
-         ps.setInt(3, vo.getHno());
-
-         int cnt = ps.executeUpdate();
-
-         System.out.println("메시지 보내기 결과, cnt = " + cnt + 
-               ", 매개변수 vo = " + vo);
-
-         return cnt;
-      } finally {
-         pool.dbClose(ps, conn);
-      }
-   }//
-    */
+   
 
    public int insertMsg(MessageVO vo) throws SQLException {
 
@@ -57,7 +30,7 @@ public class MessageDAO {
 
          conn = pool.getConnection();
 
-         String sql="insert into message(msgno, content, userno,hostno)"
+         String sql="insert into message(msgno, content,sender,receiver)"
                + " values(message_seq.nextval, ?, ?, ?)";
          ps = conn.prepareStatement(sql);
          ps.setString(1, vo.getContent());
@@ -76,76 +49,76 @@ public class MessageDAO {
    }//
 
 
-   public List<MessageVO> showMsgByNo(int no) throws SQLException  {
-      Connection conn = null;
-      PreparedStatement ps = null;
-      ResultSet rs = null;
+   public List<MessageVO> showMsg() throws SQLException  {
+		Connection conn = null;
+		PreparedStatement ps = null;
+		ResultSet rs = null;
+		
+		List<MessageVO> list = new ArrayList<MessageVO>();
+		try {
+			conn = pool.getConnection();
+			
+			String sql="select * from message";
+			ps = conn.prepareStatement(sql);
+			
+			rs = ps.executeQuery();
+			while(rs.next()) {
+				int msgno = rs.getInt("msgno");
+				String content=rs.getString("content");
+				int sender = rs.getInt("sender");
+				int receiver = rs.getInt("receiver");
+				Timestamp regdate=rs.getTimestamp("regdate");
+				
+				MessageVO vo = new MessageVO(msgno, content, sender, receiver, regdate);
+			
+				list.add(vo);	
+			}
+			
+			System.out.println("조회결과 list.size=" + list.size());
+			
+			return list;
+			
+		} finally {
+			pool.dbClose(rs, ps, conn);
+		}
+	}//
 
-      List<MessageVO> list = new ArrayList<MessageVO>();
-      try {
-         conn = pool.getConnection();
+  public List<MessageVO> showMsgByNo(int no) throws SQLException  {
+     Connection conn = null;
+     PreparedStatement ps = null;
+     ResultSet rs = null;
 
-         String sql="select a.*,b.name,b.id from message a join acc b on (a.sender=b.accno) where a.sender=? or a.receiver=?";
-         
-         ps = conn.prepareStatement(sql);
-         ps.setInt(1, no);
-         ps.setInt(2, no);
-         
-         rs = ps.executeQuery();
-         while(rs.next()) {
-            int msgno = rs.getInt("msgno");
-            String content=rs.getString("content");
-            int sender = rs.getInt("sender");
-            int receiver=rs.getInt("receiver");
-            Timestamp regdate=rs.getTimestamp("regdate");
-            String senderName=rs.getString(6);
-            String  senderId=rs.getString(7);
+     List<MessageVO> list = new ArrayList<MessageVO>();
+     try {
+        conn = pool.getConnection();
 
-            MessageVO vo = new MessageVO(msgno, content, sender, receiver, regdate,  senderName,  senderId);
+        String sql="select a.*,b.name,b.id from message a join acc b on (a.sender=b.accno) where a.sender=? or a.receiver=? order by regdate desc";
+        
+        ps = conn.prepareStatement(sql);
+        ps.setInt(1, no);
+        ps.setInt(2, no);
+        
+        rs = ps.executeQuery();
+        while(rs.next()) {
+           int msgno = rs.getInt("msgno");
+           String content=rs.getString("content");
+           int sender = rs.getInt("sender");
+           int receiver=rs.getInt("receiver");
+           Timestamp regdate=rs.getTimestamp("regdate");
+           String senderName=rs.getString(6);
+           String  senderId=rs.getString(7);
 
-            list.add(vo);
-         }
+           MessageVO vo = new MessageVO(msgno, content, sender, receiver, regdate,  senderName,  senderId);
 
-         System.out.println("조회결과 list.size=" + list.size());
+           list.add(vo);
+        }
 
-         return list;
+        System.out.println("조회결과 list.size=" + list.size());
 
-      } finally {
-         pool.dbClose(rs, ps, conn);
-      }
-   }//
+        return list;
 
-   /*
-   public MessageVO selectByNo(int msgno) throws SQLException {
-
-      Connection conn = null;
-      PreparedStatement ps = null;
-      ResultSet rs = null;
-
-      MessageVO vo = new MessageVO();
-      try {
-         conn = pool.getConnection();
-
-         String sql="select * from message where msgno=?";
-         ps = conn.prepareStatement(sql);
-         ps.setInt(1, msgno);
-
-         rs=ps.executeQuery();
-         if(rs.next()) {
-            vo.setHname(hname);
-            vo.setName(rs.getString("name"));
-            vo.setContent(rs.getString("content"));
-            vo.setRegdate(rs.getTimestamp("regdate"));
-         }
-
-         System.out.println("조회결과, vo =" + vo +
-               "매개변수 no = " + hname);
-
-         return vo;
-
-      } finally {
-         pool.dbClose(rs, ps, conn);
-      }
-   }
-   */
+     } finally {
+        pool.dbClose(rs, ps, conn);
+     }
+  }
 }

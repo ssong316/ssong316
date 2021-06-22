@@ -1,3 +1,4 @@
+<%@page import="com.SemiProj.acc.model.AccDAO"%>
 <%@page import="java.text.SimpleDateFormat"%>
 <%@page import="java.sql.SQLException"%>
 <%@page import="com.bnb.message.model.MessageVO"%>
@@ -71,19 +72,22 @@
 }
 </style>
 <%
-MessageDAO dao = new MessageDAO();
-List<MessageVO> list = null;
-int userno =Integer.parseInt((String)session.getAttribute("no"));
-try {
-   list = dao.showMsgByNo(userno);
-} catch (SQLException e) {
-   e.printStackTrace();
-}
+	MessageDAO dao = new MessageDAO();
+	AccDAO accDao = new AccDAO();
+	
+	List<MessageVO> list = null;
+	
+	try{
+		
+		list = dao.showMsg();
+	}catch(SQLException e){
+		e.printStackTrace();
+	}
 
 SimpleDateFormat sd = new SimpleDateFormat("yyyy-MM-dd HH시 mm분");
 
-
 int mycount=0;
+
 %>
 <div class="a_list">
    <h1>나의 메시지</h1>
@@ -100,7 +104,7 @@ int mycount=0;
          <tr>
             <th scope="col"></th>
             <th scope="col">번호</th>
-            <th scope="col">보낸사람</th>
+            <th scope="col">이름</th>
             <th scope="col">보낸메시지</th>
             <th scope="col">작성일</th>
          </tr>
@@ -108,22 +112,33 @@ int mycount=0;
       <tbody>
          <%if((list==null && list.isEmpty()) || session.getAttribute("login_id")==null){ %>
          <tr>
-            <td colspan="4" style="text-align: center;">데이터가 없습니다.</td>
+            <td colspan="5" style="text-align: center;">데이터가 없습니다.</td>
          </tr>
          <%}else{ %>
          <%for(int i=0; i<list.size(); i++){
                MessageVO vo = list.get(i);
-               
+               if(session.getAttribute("no").equals(Integer.toString(vo.getSender()))){
+					mycount++;
+					String receiverName="";
+					try{
+					receiverName=accDao.selectName(vo.getReceiver());
+					}catch(SQLException e){
+						e.printStackTrace();
+					}
             %>
          <tr>
             <td></td>
             <td><%=vo.getMsgno() %></td>
-            <td><%=vo.getHostname()%></td>
-            <td><%=vo.getContent() %></td>
+            <td><%=receiverName%></td>
+            <td>
+            	<a href="showmsg.jsp?receiver=<%=vo.getReceiver() %>">
+	            <%=vo.getContent() %>
+						</a>
+            </td>
             <td><%=sd.format(vo.getRegdate()) %></td>
          </tr>
          <%}//for %>
-
+         <%}//if %>
          <%}//if %>
       </tbody>
    </table>

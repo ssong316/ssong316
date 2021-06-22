@@ -60,8 +60,7 @@
 <body>
 <!-- Theme Style -->
 </head>
-<body data-spy="scroll" data-target="#templateux-navbar"
-	data-offset="200">
+<body>
 
 	<nav
 		class="navbar navbar-expand-lg navbar-light pb_navbar pb_scrolled-light"
@@ -99,9 +98,9 @@
 							<div class="dropdown">
 							<div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
 								<div class="ddi1">
-									<a class="dropdown-item" href="#">메시지</a> 
+									<a class="dropdown-item" href="<%=request.getContextPath()%>/sendmsg.jsp">메시지</a> 
 									<a class="dropdown-item" href="<%=request.getContextPath()%>/n_list.jsp">알림</a> 
-									<a class="dropdown-item" href="#">여행</a> 
+									<a class="dropdown-item" href="<%=request.getContextPath()%>/mytrip.jsp">여행</a> 
 									<a class="dropdown-item" href="#">위시리스트</a>
 								</div>
 								<hr>

@@ -210,7 +210,36 @@
 												</h6>
 											</div>
 									    </p>
-									    <button class="button-hover-like button"><span>위시리스트에 담기</span><i class="fa fa-heart"></i></button>
+									    <!--  <button class="button-hover-like button"><span>위시리스트에 담기</span><i class="fa fa-heart"></i></button> -->
+									    <button type="button" class="btn btn-primary" id="wish" data-toggle="modal" data-target="#exampleModal" data-whatever="@mdo">위시리스트 담기</button>
+										<div class="modal fade" id="exampleModal" tabindex="-1"
+											role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+										<div class="modal-dialog">
+										
+											<div class="modal-content">
+											<div class="modal-header">
+										<h4 class="modal-title" id="exampleModalLabel">위시리스트 이름 정하기</h4>
+									</div>
+									<div class="modal-body">
+											<form id="wishForm" action="<%=request.getContextPath() %>/add_wishlist.jsp?amenityno=<%=vo.getAmenityNo()%>" method="post">
+											<input type="hidden" name="amenityno" value="<%=vo.getAmenityNo()%>">
+											<div class="form-group">
+												<label for="recipient-name" class="control-label">나의 위시리스트 이름</label>
+												<input type="text" class="form-control" name="wish" id="recipient-name" placeholder="나만의 위시리스트 이름을 지정해주세요">
+											</div>
+											</form>
+									</div>
+									<div class="modal-footer">
+										<button type="button" class="btn btn-default"
+											data-dismiss="modal">닫기</button>
+										<button type="button" class="btn btn-primary" id="wishbtn"
+											>저장하기</button>
+									</div>
+								</div>
+								
+							</div>
+						</div>
+									    
 									    <a href="detail.jsp?no=<%=vo.getAmenityNo()%>" class="btn btn-primary">자세히 보기</a>
 								  	</div>
 								</div>
@@ -235,6 +264,21 @@
 	
 	</footer>	
 	<script type="text/javascript">
+	$('#wish').on('click', function() {
+		$('#exampleModal').modal('show');
+	});
+	
+	$('.btn btn-default').on('click', function() {
+		$('#exampleModal').modal('hide');
+	});
+	
+	$('#wishbtn').click(function(){
+		$('#wishForm').submit();
+	})
+	
+	$('#modal').modal("hide");
+	$('#modal').modal("show");
+	
 	let map;
 	let contentString;
 	let priceString;
@@ -293,5 +337,17 @@
       src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBf4uRUg3aWq9NfgQ2EXWZIOJoaE3zzXu8&callback=initMap&libraries=&v=weekly"
       async
     ></script>
+    <script src="<%=request.getContextPath()%>/js/jquery-3.3.1.min.js"></script>
+<script src="<%=request.getContextPath()%>/js/jquery-migrate-3.0.1.min.js"></script>
+<script src="<%=request.getContextPath()%>/js/popper.min.js"></script>
+<script src="<%=request.getContextPath()%>/js/bootstrap.min.js"></script>
+<script src="<%=request.getContextPath()%>/js/owl.carousel.min.js"></script>
+<script src="<%=request.getContextPath()%>/js/jquery.stellar.min.js"></script>
+<script src="<%=request.getContextPath()%>/js/jquery.fancybox.min.js"></script>
+<script src="<%=request.getContextPath()%>/js/jquery.easing.1.3.js"></script>
+<script src="<%=request.getContextPath()%>/js/aos.js"></script>
+<script src="<%=request.getContextPath()%>/js/bootstrap-datepicker.js"></script>
+<script src="<%=request.getContextPath()%>/js/jquery.timepicker.min.js"></script>
+<script src="<%=request.getContextPath()%>/js/main.js"></script>
 </body>
 </html>

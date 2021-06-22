@@ -94,5 +94,46 @@ public class AccDAO {
 			pool.dbClose(rs, ps, conn);
 		}
 	}
-
+	
+	public AccVO selectByHostno(int no) throws SQLException {
+		Connection conn = null;
+		PreparedStatement ps = null;
+		ResultSet rs = null;
+		try {
+			conn = pool.getConnection();
+			String sql =  "select a.* from acc a join host b on b.userno=a.accno where b.hostno=?";
+			ps = conn.prepareStatement(sql);
+			ps.setInt(1, no);
+			rs = ps.executeQuery();
+			
+			AccVO vo = new AccVO();
+			if(rs.next()) {
+				vo.setAccNo(Integer.parseInt(rs.getString("accno")));
+				vo.setName(rs.getString("name"));
+				vo.setId(rs.getString("id"));
+			}
+			return vo;
+		}finally {
+			pool.dbClose(rs, ps, conn);
+		}
+	}
+	public String selectName(int no) throws SQLException {
+		Connection conn = null;
+		PreparedStatement ps = null;
+		ResultSet rs = null;
+		try {
+			conn = pool.getConnection();
+			String sql =  "select name from acc where accno=?";
+			ps = conn.prepareStatement(sql);
+			ps.setInt(1, no);
+			rs = ps.executeQuery();
+			String res="";
+			if(rs.next()) {
+				res=rs.getString("name");
+			}
+			return res;
+		}finally {
+			pool.dbClose(rs, ps, conn);
+		}
+	}
 }

@@ -11,9 +11,54 @@
 
 <body>
 	<header>
-		<div>WhatNee</div>
-		<div>
-			<div id="host">호스트 모드로 전환</div>
-			<div id="member"><img id="menubar" src="<%=request.getContextPath()%>/images/menubar.png"><img id="profile" src="<%=request.getContextPath() %>/images/profile.png"></div>
+		<div class="container">
+			<a class="navbar-brand" href="<%=request.getContextPath()%>/main.jsp"><span
+				class="text-danger">What</span>Ni</a>
+			<div class="site-menu-toggle js-site-menu-toggle  ml-auto"
+				data-aos="fade" data-toggle="collapse"
+				data-target="#templateux-navbar-nav"
+				aria-controls="templateux-navbar-nav" aria-expanded="false"
+				aria-label="Toggle navigation">
+				<span></span> <span></span> <span></span>
+			</div>
+			<!-- END menu-toggle -->
+
+			<div class="collapse navbar-collapse" id="templateux-navbar-nav">
+				<ul class="navbar-nav ml-auto">
+					<li class="nav-item"><a class="nav-link" href="<%=request.getContextPath()%>/main.jsp">Home</a></li>
+					<li class="nav-item"><a class="nav-link"
+						href="<%=request.getContextPath()%>/f_list2.jsp">Help</a></li>
+				<%if(!t_login){ %>
+					<li class="nav-item cta-btn ml-xl-2 ml-lg-2 ml-md-0 ml-sm-0 ml-0">
+					<a class="nav-link" href="#" target="_blank" data-toggle="modal"
+						data-target="#staticBackdrop1">
+						<span class="pb_rounded-4 px-4 rounded">Login</span></a></li>
+				<%}else{ %>
+				
+					<li class="nav-item cta-btn ml-xl-2 ml-lg-2 ml-md-0 ml-sm-0 ml-0">
+						
+							<a class="nav-link" role="button" id="dropdownMenuLink"
+								data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> 
+								<span class="pb_rounded-4 px-4 rounded"><%=t_name%></span>
+							</a>
+							<div class="dropdown">
+							<div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+								<div class="ddi1">
+									<a class="dropdown-item" href="#">메시지</a> 
+									<a class="dropdown-item" href="<%=request.getContextPath()%>/n_list.jsp">알림</a> 
+									<a class="dropdown-item" href="#">여행</a> 
+									<a class="dropdown-item" href="#">위시리스트</a>
+								</div>
+								<hr>
+								<a class="dropdown-item" href="#">호스트되기</a> 
+								<a class="dropdown-item" href="<%=request.getContextPath()%>/acc/register.jsp">계정</a>
+								<hr>
+								<a class="dropdown-item" href="<%=request.getContextPath()%>/login/logout.jsp">로그아웃</a>
+							</div>
+						</div>
+					</li>
+					<%} %>
+				</ul>
+			</div>
 		</div>
 	</header>
